@@ -22,9 +22,12 @@ export const requestLogin = (email, password) => {
             localStorage.setItem('user', JSON.stringify(user))
             dispatch(login(user, token))
         } catch (err) {
-            let errorMessage = err.message
+            let errorMessage = err.message || 'Request failed'
             if (err && err.response && err.response.data && err.response.data.error && typeof(err.response.data.error) === 'string') {
                 errorMessage = err.response.data.error
+            }
+            if (err && err.response && err.response.data && err.response.data.error && err.response.data.error.details) {
+                errorMessage =  err.response.data.error.details[0] && err.response.data.error.details[0].message
             }
             alertError(errorMessage)            
         }
