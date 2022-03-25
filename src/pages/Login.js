@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import axios from 'axios'
 import { useDispatch } from 'react-redux'
 
-import { alertError, alertSuccess } from '../utils/feedback'
-import { login } from '../redux/actions/userActionCreators'
+import { requestLogin } from '../redux/actions/userActionCreators'
 
 function Login() {
   const dispatch = useDispatch()
@@ -13,27 +11,7 @@ function Login() {
   const [password, setPassword] = useState("")
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log({
-      email,
-      password
-    });
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {email, password})
-      .then(res => {
-        console.log({res});
-        const { message, token, user } = res.data
-        alertSuccess(message)
-        localStorage.setItem('token', token)
-        localStorage.setItem('user', JSON.stringify(user))
-        dispatch(login(user, token))
-      })
-      .catch(err => {
-        console.log({err});
-        let errorMessage = err.message
-        if (err.response && err.response.data && err.response.data.error && typeof(err.response.data.error) === 'string') {
-          errorMessage = err.response.data.error
-        }
-        alertError(errorMessage)
-      })
+    dispatch(requestLogin(email, password))
   }
   return (
     <Form className="m-5" onSubmit={handleSubmit}>
