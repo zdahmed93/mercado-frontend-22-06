@@ -1,4 +1,4 @@
-import { 
+import {
   BrowserRouter as Router,
   Route,
   Switch
@@ -14,21 +14,26 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import UpdateItem from './pages/UpdateItem';
 
+import GlobalLoading from './components/GlobalLoading';
+
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/items' component={Items} />
-        <Route path='/create-item' component={CreateItem} />
-        <Route path='/update-item/:id' component={UpdateItem} />
-        <Route path='/items/:id' component={ItemDetails} />
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
+    <>
+      <GlobalLoading />
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/items' component={Items} />
+          <Route path='/create-item' component={CreateItem} />
+          <Route path='/update-item/:id' component={UpdateItem} />
+          <Route path='/items/:id' component={ItemDetails} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </>
   );
 }
 
