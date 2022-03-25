@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { alertError, alertSuccess } from '../../utils/feedback';
 import { LOGIN, LOGOUT } from '../types/userTypes';
+import { requestFailed, requestStarted, requestSucceeded } from './feedbackActionCreators';
 
 export const login = (user, token) => ({ type: LOGIN, payload: { user, token } });
 
@@ -14,8 +15,10 @@ export const logout = () => {
 
 export const requestLogin = (email, password) => {
     return async (dispatch) => {
+        dispatch(requestStarted())
         try {
             const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { email, password })
+            dispatch(requestSucceeded())
             const { message, token, user } = res.data
             alertSuccess(message)
             localStorage.setItem('token', token)
@@ -29,7 +32,7 @@ export const requestLogin = (email, password) => {
             if (err && err.response && err.response.data && err.response.data.error && err.response.data.error.details) {
                 errorMessage =  err.response.data.error.details[0] && err.response.data.error.details[0].message
             }
-            alertError(errorMessage)            
+            dispatch(requestFailed(errorMessage))
         }
     }
 }
