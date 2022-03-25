@@ -3,6 +3,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 
 import CreateItem from './pages/CreateItem';
 import Home from './pages/Home';
@@ -15,8 +16,15 @@ import Register from './pages/Register';
 import UpdateItem from './pages/UpdateItem';
 
 import GlobalLoading from './components/GlobalLoading';
+import { login } from './redux/actions/userActionCreators';
 
 function App() {
+  const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
+  if (token && user) {
+    dispatch(login(user, token))
+  }
   return (
     <>
       <GlobalLoading />
