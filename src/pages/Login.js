@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
 
 import { alertError, alertSuccess } from '../utils/feedback'
+import { login } from '../redux/actions/userActionCreators'
 
 function Login() {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const handleSubmit = (e) => {
@@ -21,6 +24,7 @@ function Login() {
         alertSuccess(message)
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
+        dispatch(login(user, token))
       })
       .catch(err => {
         console.log({err});
