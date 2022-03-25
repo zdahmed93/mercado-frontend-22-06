@@ -10,7 +10,7 @@ import {
 
 const Sidebar = () => {
   return (
-      <CDBSidebar>
+      <CDBSidebar style={{height: '100vh', position: 'sticky', top: 0 }}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Contrast</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
