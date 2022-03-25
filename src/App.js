@@ -17,6 +17,8 @@ import UpdateItem from './pages/UpdateItem';
 
 import GlobalLoading from './components/GlobalLoading';
 import { login } from './redux/actions/userActionCreators';
+import PublicRoute from './routes/PublicRoute';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch()
@@ -30,13 +32,16 @@ function App() {
       <GlobalLoading />
       <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/profile' component={Profile} />
-          <Route path='/items' component={Items} />
-          <Route path='/create-item' component={CreateItem} />
-          <Route path='/update-item/:id' component={UpdateItem} />
+
+          <PublicRoute exact path='/' component={Home} />
+          <PublicRoute path='/login' component={Login} />
+          <PublicRoute path='/register' component={Register} />
+
+          <PrivateRoute path='/profile' component={Profile} />
+          <PrivateRoute path='/items' component={Items} />
+          <PrivateRoute path='/create-item' component={CreateItem} />
+          <PrivateRoute path='/update-item/:id' component={UpdateItem} />
+          
           <Route path='/items/:id' component={ItemDetails} />
           <Route component={NotFound} />
         </Switch>
