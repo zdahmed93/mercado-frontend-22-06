@@ -7,6 +7,7 @@ import {
     UPDATE_ITEM,
     ADD_ITEM
 } from '../types/itemsTypes';
+import { requestFailed, requestStarted, requestSucceeded } from './feedbackActionCreators';
 
 
 export const setAllItems = (items) => ({ type: SET_ALL_ITEMS, payload: items });
@@ -22,12 +23,15 @@ export const addItem = (item) => ({ type: ADD_ITEM, payload: item });
 
 export const fetchAllItems = () => {
     return async (dispatch) => {
+        dispatch(requestStarted())
         try {
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/items`)
+            dispatch(requestSucceeded())
             const items = res.data
             dispatch(setAllItems(items))
         } catch (error) {
             console.log({ error });
+            dispatch(requestFailed(error.message))
         }
     }
 }
