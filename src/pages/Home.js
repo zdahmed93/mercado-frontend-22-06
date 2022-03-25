@@ -1,17 +1,13 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { fetchAllItems } from '../redux/actions/itemsActionCreators'
 
 function Home() {
-    const [items, setItems] = useState([])
+    const items = useSelector(state => state.items.all)
+    const dispatch = useDispatch()
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/items`)
-            .then(res => {
-                console.log({ res });
-                setItems(res.data)
-            })
-            .catch(err => {
-                console.log({ err });
-            })
+        dispatch(fetchAllItems())
     }, [])
   return (
     <div>
