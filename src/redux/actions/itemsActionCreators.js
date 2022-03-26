@@ -72,3 +72,23 @@ export const fetchItemById = (id) => {
         }
     }
 }
+
+
+export const requestUpdatingItem = (id, data, history) => {
+    return async (dispatch, getState) => {
+        const state = getState()
+        const token = state.user.token
+        dispatch(requestStarted())
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_API_URL}/items/${id}`, data, {headers: {authorization: token}})
+            dispatch(requestSucceeded())
+            if (res.data && res.data.message) {
+                alertSuccess(res.data.message)
+                history.push('/items')
+            }
+            dispatch(updateItem(id, data))
+        } catch (err) {
+            dispatch(requestFailed(err))
+        }
+    }
+}
