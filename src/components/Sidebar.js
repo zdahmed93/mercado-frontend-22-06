@@ -7,6 +7,7 @@ import {
   CDBSidebarMenuItem,
   CDBSidebarFooter,
 } from 'cdbreact';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -14,9 +15,15 @@ const Sidebar = () => {
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Mercado</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <CDBSidebarMenuItem icon="fa fa-home">Home</CDBSidebarMenuItem>
-            <CDBSidebarMenuItem icon="fa fa-plus-circle">Create Item</CDBSidebarMenuItem>
-            <CDBSidebarMenuItem icon="fa fa-user">Profile</CDBSidebarMenuItem>
+            <NavLink to='/items'>
+              <CDBSidebarMenuItem icon="fa fa-home">Home</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink to='/create-item'>
+              <CDBSidebarMenuItem icon="fa fa-plus-circle">Create Item</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink to='/profile'>
+              <CDBSidebarMenuItem icon="fa fa-user">Profile</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
