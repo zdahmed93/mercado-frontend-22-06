@@ -8,8 +8,11 @@ import {
   CDBSidebarFooter,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/actions/userActionCreators';
 
 const Sidebar = () => {
+  const dispatch = useDispatch()
   return (
       <CDBSidebar style={{height: '100vh', position: 'sticky', top: 0 }}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Mercado</CDBSidebarHeader>
@@ -28,7 +31,7 @@ const Sidebar = () => {
         </CDBSidebarContent>
 
         <CDBSidebarFooter >
-            <CDBSidebarMenuItem icon="fa fa-lock">Log Out</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem icon="fa fa-lock" onClick={() => dispatch(logout())}>Log Out</CDBSidebarMenuItem>
         </CDBSidebarFooter>
       </CDBSidebar>
   );
