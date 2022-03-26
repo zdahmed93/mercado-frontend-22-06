@@ -32,7 +32,7 @@ export const fetchAllItems = () => {
             dispatch(setAllItems(items))
         } catch (error) {
             console.log({ error });
-            dispatch(requestFailed(error.message))
+            dispatch(requestFailed(error))
         }
     }
 }
@@ -54,6 +54,21 @@ export const requestCreatingItem = (data, history) => {
             }
         } catch (err) {
             dispatch(requestFailed(err))
+        }
+    }
+}
+
+
+export const fetchItemById = (id) => {
+    return async (dispatch) => {
+        dispatch(requestStarted())
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/items/${id}`)
+            dispatch(requestSucceeded())
+            const item = res.data
+            dispatch(selectItem(item))
+        } catch (error) {
+            dispatch(requestFailed(error))
         }
     }
 }

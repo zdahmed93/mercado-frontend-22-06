@@ -18,7 +18,7 @@ const Sidebar = () => {
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Mercado</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <NavLink to='/items'>
+            <NavLink to='/items' exact>
               <CDBSidebarMenuItem icon="fa fa-home">Home</CDBSidebarMenuItem>
             </NavLink>
             <NavLink to='/create-item'>
