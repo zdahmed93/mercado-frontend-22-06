@@ -11,24 +11,17 @@ import {
 const Sidebar = () => {
   return (
       <CDBSidebar style={{height: '100vh', position: 'sticky', top: 0 }}>
-        <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Contrast</CDBSidebarHeader>
+        <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Mercado</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <CDBSidebarMenuItem icon="th-large">Dashboard</CDBSidebarMenuItem>
-            <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem>
-            <CDBSidebarMenuItem icon="credit-card" iconType="solid">
-              Metrics
-            </CDBSidebarMenuItem>
+            <CDBSidebarMenuItem icon="fa fa-home">Home</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem icon="fa fa-plus-circle">Create Item</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem icon="fa fa-user">Profile</CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div
-            className="sidebar-btn-wrapper"
-            style={{padding: '20px 5px'}}
-          >
-            Sidebar Footer
-          </div>
+        <CDBSidebarFooter >
+            <CDBSidebarMenuItem icon="fa fa-lock">Log Out</CDBSidebarMenuItem>
         </CDBSidebarFooter>
       </CDBSidebar>
   );
