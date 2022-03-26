@@ -19,6 +19,7 @@ import GlobalLoading from './components/GlobalLoading';
 import { login } from './redux/actions/userActionCreators';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import CustomRoute from './routes/CustomRoute';
 
 function App() {
   const dispatch = useDispatch()
@@ -38,12 +39,12 @@ function App() {
           <PublicRoute path='/register' component={Register} />
 
           <PrivateRoute path='/profile' component={Profile} />
-          <PrivateRoute path='/items' component={Items} />
+          <PrivateRoute exact path='/items' component={Items} />
           <PrivateRoute path='/create-item' component={CreateItem} />
           <PrivateRoute path='/update-item/:id' component={UpdateItem} />
-          
-          <Route path='/items/:id' component={ItemDetails} />
-          <Route component={NotFound} />
+
+          <CustomRoute path='/items/:id' component={ItemDetails} />
+          <CustomRoute component={NotFound} />
         </Switch>
       </Router>
     </>
