@@ -1,11 +1,11 @@
 import React from 'react'
 
+import Navbar from '../components/Navbar'
+
 function OutsideLayout(props) {
     return (
         <div>
-            <div style={{ backgroundColor: 'lightgreen', padding: 15 }}>
-                <p>OutsideLayout Navbar</p>
-            </div>
+            <Navbar />
             <div>
                 {props.children}
             </div>
