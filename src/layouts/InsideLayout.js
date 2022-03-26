@@ -6,7 +6,7 @@ function InsideLayout(props) {
   return (
     <div style={{ display: 'flex' }}>
         <Sidebar />
-        <div>
+        <div style={{ flex: 1 }}>
             {props.children}
         </div>
     </div>

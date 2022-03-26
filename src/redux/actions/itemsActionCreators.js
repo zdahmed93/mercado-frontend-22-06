@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { alertSuccess } from '../../utils/feedback';
 
 import {
     SET_ALL_ITEMS,
@@ -32,6 +33,27 @@ export const fetchAllItems = () => {
         } catch (error) {
             console.log({ error });
             dispatch(requestFailed(error.message))
+        }
+    }
+}
+
+export const requestCreatingItem = (data, history) => {
+    return async (dispatch, getState) => {
+        const state = getState()
+        const token = state.user.token
+        dispatch(requestStarted())
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/items`, data, {headers: {authorization: token}})            
+            dispatch(requestSucceeded())
+            if (res.data && res.data.message) {
+                alertSuccess(res.data.message)
+            }
+            if (res.data && res.data.item && res.data.item._id) {
+                dispatch(addItem({ ...data, _id: res.data.item._id }))
+                history.push('/items')
+            }
+        } catch (err) {
+            dispatch(requestFailed(err))
         }
     }
 }
