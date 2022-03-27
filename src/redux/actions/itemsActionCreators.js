@@ -92,3 +92,22 @@ export const requestUpdatingItem = (id, data, history) => {
         }
     }
 }
+
+export const requestDeletingItem = (itemId, closeModal) => {
+    return async (dispatch, getState) => {
+        const state = getState()
+        const token = state.user.token
+        dispatch(requestStarted())
+        try {
+            const res = await axios.delete(`${process.env.REACT_APP_API_URL}/items/${itemId}`, { headers: { authorization: token } })
+            dispatch(requestSucceeded())
+            if (res.data && res.data.message) {
+                alertSuccess(res.data.message)
+            }
+            dispatch(removeItem(itemId))
+            closeModal()
+        } catch (err) {
+            dispatch(requestFailed(err))
+        }
+    }
+}

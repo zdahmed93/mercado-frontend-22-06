@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import DeleteItemModal from './DeleteItemModal'
+
 function ItemCard({ item }) {
     const { isAuth, info } = useSelector(state => state.user)
     const itemUserId = item?.user?._id
@@ -29,7 +31,7 @@ function ItemCard({ item }) {
                                 <Link to={`/update-item/${item._id}`}>
                                     <Button variant="warning" className='mx-1'><i class="bi bi-pencil-square"></i></Button>
                                 </Link>
-                                <Button variant="danger" className='mx-1'><i class="bi bi-trash"></i></Button>
+                                <DeleteItemModal item={item} />
                             </>
                         )
                     }
