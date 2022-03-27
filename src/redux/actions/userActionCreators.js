@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { alertError, alertSuccess } from '../../utils/feedback';
+import { alertSuccess } from '../../utils/feedback';
 import { LOGIN, LOGOUT } from '../types/userTypes';
 import { requestFailed, requestStarted, requestSucceeded } from './feedbackActionCreators';
 
@@ -26,6 +26,24 @@ export const requestLogin = (email, password) => {
             dispatch(login(user, token))
         } catch (err) {
             dispatch(requestFailed(err))
+        }
+    }
+}
+
+
+export const requestRegister = ({ firstName, lastName, email, password }, history) => {
+    return async (dispatch, getState) => {
+        dispatch(requestStarted())
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, { firstName, lastName, email, password })
+            console.log({res});
+            dispatch(requestSucceeded())
+            if (res.data.message) {
+                alertSuccess(res.data.message)
+            }
+            history.push('/login')
+        } catch (err) {            
+            dispatch(requestFailed(err))            
         }
     }
 }
