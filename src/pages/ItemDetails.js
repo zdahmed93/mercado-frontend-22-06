@@ -12,7 +12,7 @@ export default function ItemDetails() {
 
   useEffect(() => {
     dispatch(fetchItemById(id))
-  }, [dispatch, id])
+  }, [id])
 
   return (
     <Container className='mt-3'>

@@ -39,7 +39,8 @@ function Register() {
     if (password !== confirmPassword) {
       return alertError('Passwords mismatch')
     }
-    dispatch(requestRegister({ firstName, lastName, email, password }, history))
+    const newUserInformations = { firstName, lastName, email, password }
+    dispatch(requestRegister(newUserInformations, history))
   }
   function handleChange(e) {
     setRegisterData(prevItemData => ({ ...prevItemData, [e.target.name]: e.target.value }))

@@ -15,7 +15,7 @@ function DisplayItems() {
         <Container>
             <Row>
                 {items.map(item => (
-                    <ItemCard item={item} />
+                    <ItemCard key={item._id} item={item} />
                 ))}
             </Row>
         </Container>

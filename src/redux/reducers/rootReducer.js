@@ -10,4 +10,20 @@ const rootReducer = combineReducers({
     user: userReducer
 })
 
+// STORE = {
+//     items: {
+//         all: [],
+//         selected: null
+//     },
+//     feedback: {
+//       loading: false,
+//       error: ""
+//     },
+//     user:  {
+//       isAuth: false,
+//       info: null,
+//       token: null
+//      }
+// }
+
 export default rootReducer

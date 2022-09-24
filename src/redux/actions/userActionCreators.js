@@ -31,7 +31,8 @@ export const requestLogin = (email, password) => {
 }
 
 
-export const requestRegister = ({ firstName, lastName, email, password }, history) => {
+export const requestRegister = (objectData, history) => {
+    const { firstName, lastName, email, password } = objectData
     return async (dispatch, getState) => {
         dispatch(requestStarted())
         try {
